@@ -76,7 +76,7 @@ export function NewChat() {
   const maskStore = useMaskStore();
 
   const masks = maskStore.getAll();
-  const groups = useMaskGroup(masks);
+  // const groups = useMaskGroup(masks);
 
   const navigate = useNavigate();
   const config = useAppConfig();
@@ -103,12 +103,12 @@ export function NewChat() {
     },
   });
 
-  useEffect(() => {
-    if (maskRef.current) {
-      maskRef.current.scrollLeft =
-        (maskRef.current.scrollWidth - maskRef.current.clientWidth) / 2;
-    }
-  }, [groups]);
+  // useEffect(() => {
+  //   if (maskRef.current) {
+  //     maskRef.current.scrollLeft =
+  //       (maskRef.current.scrollWidth - maskRef.current.clientWidth) / 2;
+  //   }
+  // }, [groups]);
 
   return (
     <div className={styles["new-chat"]}>
@@ -167,17 +167,11 @@ export function NewChat() {
       </div>
 
       <div className={styles["masks"]} ref={maskRef}>
-        {groups.map((masks, i) => (
-          <div key={i} className={styles["mask-row"]}>
-            {masks.map((mask, index) => (
-              <MaskItem
-                key={index}
-                mask={mask}
-                onClick={() => startChat(mask)}
-              />
-            ))}
-          </div>
-        ))}
+        <div className={styles["mask-content"]}>
+          {masks.map((mask, index) => (
+            <MaskItem key={index} mask={mask} onClick={() => startChat(mask)} />
+          ))}
+        </div>
       </div>
     </div>
   );
